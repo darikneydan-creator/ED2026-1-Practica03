@@ -52,8 +52,8 @@ interpretacion (Cons x) _ = x --Una constante es el valor asi solito
 interpretacion (Not x) xs = negacion (interpretacion x xs) --Son funciones normalitas, pero creo que igual habia que implementarlas desde 0 entonces pueden ver funciones auxiliares hasta abajo para ver que hace cada funcion
 interpretacion (And x y) xs = conjuncion (interpretacion x xs) (interpretacion y xs)
 interpretacion (Or x y) xs = disyuncion (interpretacion x xs) (interpretacion y xs)
-interpretacion (Impl x y) xs = disyuncion (negacion (interpretacion x xs)) (interpretacion y xs)
-interpretacion (Syss x y) xs = disyuncion (conjuncion (interpretacion x xs) (interpretacion y xs)) (conjuncion (negacion (interpretacion x xs)) (negacion (interpretacion y xs)))
+interpretacion (Impl x y) xs = implicacion (interpretacion x xs) (interpretacion y xs)
+interpretacion (Syss x y) xs = bicondicional (interpretacion x xs) (interpretacion y xs)
 
 -- Ejercicio 3
 estadosPosibles :: Prop -> [Estado]
@@ -99,6 +99,17 @@ disyuncion _ True = True
 disyuncion True _ = True
 disyuncion False False = False
 
+implicacion :: Bool -> Bool -> Bool
+implicacion True True = True
+implicacion False _ = True
+implicacion True False = False
+
+bicondicional :: Bool -> Bool -> Bool
+bicondicional True True = True
+bicondicional False False = True
+bicondicional True False = False
+bicondicional False True = False
+
 esElemento :: Eq a => a -> [a] -> Bool --Funcion esElemento devuelve True si x es elemento de lista xs, False si no es elemento
 esElemento _ [] = False
 esElemento x (y:xs) = if (x == y) then True else (esElemento x xs)
@@ -108,7 +119,7 @@ noDuplicar [] = []
 noDuplicar (x:xs) = if (esElemento x xs) then (noDuplicar xs) else (x:(noDuplicar xs))
 
 todasValidas :: Prop -> [Estado] -> Bool
-todasValidas _ [] = False --esto no deberia pasar nunca, pero da un warning si no lo pongo
+todasValidas x [] = todasValidas x [[]] --esto no deberia pasar nunca, pero da un warning si no lo pongo
 todasValidas x (y:[]) = interpretacion x y --caso "base", checa si el ultimo estado es valido para x
 todasValidas x (y:xs) = if (interpretacion x y) then (todasValidas x xs) else False --si el estado y es valido para x, se sigue con el resto. Si no, entonces no todos los estados dados son validos y se devuelve false
 
