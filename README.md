@@ -26,8 +26,8 @@ En esta sección deben eliminar esta línea de texto, borrar la leyenda "Integra
     - No. de Cuenta: 323256223
 + Integrante 2
     - No. de Cuenta: 
-+ Integrante 3
-    - No. de Cuenta: 
++ Omana Ramos Darik Neydan
+    - No. de Cuenta: 322211175
 
 ## Comentarios
 
