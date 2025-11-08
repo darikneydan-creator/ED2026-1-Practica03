@@ -24,8 +24,8 @@ En esta sección deben eliminar esta línea de texto, borrar la leyenda "Integra
 
 + Iago Hernández Bautista
     - No. de Cuenta: 323256223
-+ Integrante 2
-    - No. de Cuenta: 
++ Solorio Rauda Pedro
+    - No. de Cuenta: 323112343
 + Omana Ramos Darik Neydan
     - No. de Cuenta: 322211175
 
